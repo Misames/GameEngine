@@ -194,7 +194,34 @@ int main()
 
 	Application gameEngine;
 
-	gameEngine.Run();
+	auto obj1 = new GameObject;
+	auto obj2 = new GameObject;
+
+	GameObject::gameObjects.push_back(obj1);
+	GameObject::gameObjects.push_back(obj2);
+
+	Tag::AddTag("pouet");
+	Tag::AddTag("kiki");
+
+	std::cout << obj1->getTag() << std::endl;
+
+	obj1->ChangeTag(1);
+
+	std::cout << obj1->getTag() << std::endl;
+
+	obj1->ChangeTag(2);
+
+	std::cout << obj1->getTag() << std::endl;
+
+	Tag::RenamingTag(2, "prout");
+
+	std::cout << obj1->getTag() << std::endl;
+
+	Tag::DeleteTag(2);
+
+	std::cout << obj1->getTag() << std::endl;
+
+	// gameEngine.Run();
 
 	return 0;
 }

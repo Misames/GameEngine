@@ -11,6 +11,7 @@
 #include "Input.h"
 #include "Engine.h"
 #include "EngineContext.h"
+#include "GameObject.h"
 
 #include <iostream>
 #include <vector>
@@ -61,10 +62,8 @@ namespace ESGI
 		bool m_needToQuit = false;
 
 		Application(EngineContext &context) : m_context(context) {}
-		Application() : Application(Application::CreateContext()) // Depuis le C++11 un constructeur peut en appeler un autre
-		{
-		}
-		Application(Application &app) = delete; // une application ne peut etre dupliquee
+		Application() : Application(Application::CreateContext()) {} // Depuis le C++11 un constructeur peut en appeler un autre
+		Application(Application &app) = delete;						 // une application ne peut etre dupliquee
 
 		// Le fait de creer explicitement les elements important du moteur nous permet de mieux
 		// maitriser la gestion memoire mais plus particulierement l'ordre de construction/destruction
@@ -189,7 +188,7 @@ namespace ESGI
 	};
 }
 
-int main(void)
+int main()
 {
 	using namespace ESGI;
 

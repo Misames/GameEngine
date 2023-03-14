@@ -22,11 +22,13 @@
     <ClCompile Include="Sources\Engine.cpp" />
     <ClCompile Include="Sources\Input.cpp" />
     <ClCompile Include="Sources\main.cpp" />
+    <ClCompile Include="Sources\GameObject.cpp" />
     <ClCompile Include="Sources\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Engine.h" />
     <ClInclude Include="Sources\EngineContext.h" />
+    <ClInclude Include="Sources\GameObject.h" />
     <ClInclude Include="Sources\InfraStructure.h" />
     <ClInclude Include="Sources\Input.h" />
     <ClInclude Include="Sources\Timer.h" />

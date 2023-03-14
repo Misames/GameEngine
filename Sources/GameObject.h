@@ -11,7 +11,7 @@ namespace ESGI
         static std::vector<std::string> tags;
         static void AddTag(std::string newTagName);
         static void DeleteTag(uint8_t indexTag);
-        static void ChangeAllTag(uint8_t index);
+        static void RenamingTag(uint8_t index, std::string newTagName);
     };
 
     struct Transform
@@ -25,15 +25,15 @@ namespace ESGI
     class GameObject : public InfraStructure
     {
     private:
-        std::string name;
+        std::string m_name;
         std::string m_tag;
-        Transform *positon;
+        Transform *m_transform;
 
         bool Initialize() final;
         void DeInitialize() final;
 
     public:
-        static int countGameObject;
+        static uint64_t countGameObject;
         static std::vector<GameObject *> gameObjects;
         static std::vector<GameObject *> FindObjectsWithTag(std::string tagName);
 

@@ -9,26 +9,22 @@ namespace ESGI
     {
         static std::string defaultTagName;
         static std::vector<std::string> tags;
-        void AddTag(std::string newTagName);
-        void DeleteTag(std::string tagName);
+        static void AddTag(std::string newTagName);
+        static void DeleteTag(uint8_t indexTag);
+        static void ChangeAllTag(uint8_t index);
     };
 
-    class Transform
+    struct Transform
     {
-    private:
         double tx, ty, tz;
         double rx, ry, rz;
         double sx, sy, sz;
-
-    public:
         Transform() : tx(0), ty(0), tz(0), rx(0), ry(0), rz(0), sx(0), sy(0), sz(0) {}
     };
 
     class GameObject : public InfraStructure
     {
     private:
-        static int countGameObject;
-
         std::string name;
         std::string m_tag;
         Transform *positon;
@@ -37,8 +33,12 @@ namespace ESGI
         void DeInitialize() final;
 
     public:
+        static int countGameObject;
+        static std::vector<GameObject *> gamesObjects;
         GameObject();
         ~GameObject();
         void Update();
+        void ChangeTag(uint8_t indexTag);
+        std::string getTag() const;
     };
 }

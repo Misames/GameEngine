@@ -197,13 +197,12 @@ int main()
 	auto obj = new GameObject;
 	auto obj2 = new GameObject;
 
-	GameObject::gamesObjects.push_back(obj);
-	GameObject::gamesObjects.push_back(obj2);
+	GameObject::gameObjects.push_back(obj);
+	GameObject::gameObjects.push_back(obj2);
 
-	Tag::AddTag("MDR");
-	Tag::AddTag("lol");
+	auto res = GameObject::FindObjectsWithTag("Untagged");
 
-	gameEngine.Run();
+	// gameEngine.Run();
 
 	return 0;
 }

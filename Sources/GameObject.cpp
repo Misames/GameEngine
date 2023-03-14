@@ -5,10 +5,10 @@
 namespace ESGI
 {
     int GameObject::countGameObject = 0;
-    std::vector<GameObject *> GameObject::gamesObjects;
+    std::vector<GameObject *> GameObject::gameObjects;
 
     std::string Tag::defaultTagName = "Untagged";
-    std::vector<std::string> Tag::tags;
+    std::vector<std::string> Tag::tags = {"Untagged"};
 
     void Tag::AddTag(std::string newTagName)
     {
@@ -17,7 +17,7 @@ namespace ESGI
 
     void Tag::ChangeAllTag(uint8_t indexNew)
     {
-        for (auto &&i : GameObject::gamesObjects)
+        for (auto &&i : GameObject::gameObjects)
         {
         }
     }
@@ -62,13 +62,28 @@ namespace ESGI
         std::cout << "[GameObject] upadte\n";
     }
 
+    std::string GameObject::getTag() const
+    {
+        return this->m_tag;
+    }
+
     void GameObject::ChangeTag(uint8_t indexTag)
     {
         this->m_tag = Tag::tags.at(indexTag);
     }
 
-    std::string GameObject::getTag() const
+    std::vector<GameObject *> GameObject::FindObjectsWithTag(std::string tagName)
     {
-        return this->m_tag;
+        std::vector<GameObject *> taggedGameObjects = std::vector<GameObject *>();
+        for (auto &&item : GameObject::gameObjects)
+        {
+            if (item->m_tag == tagName)
+            {
+                std::cout << "get tag !!!" << std::endl;
+                taggedGameObjects.push_back(item);
+            }
+        }
+
+        return taggedGameObjects;
     }
 }

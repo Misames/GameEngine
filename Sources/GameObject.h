@@ -34,7 +34,9 @@ namespace ESGI
 
     public:
         static int countGameObject;
-        static std::vector<GameObject *> gamesObjects;
+        static std::vector<GameObject *> gameObjects;
+        static std::vector<GameObject *> FindObjectsWithTag(std::string tagName);
+
         GameObject();
         ~GameObject();
         void Update();

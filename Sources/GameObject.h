@@ -1,9 +1,18 @@
 #pragma once
 
 #include "InfraStructure.h"
+#include <vector>
 
 namespace ESGI
 {
+    struct Tag
+    {
+        static std::string defaultTagName;
+        static std::vector<std::string> tags;
+        void AddTag(std::string newTagName);
+        void DeleteTag(std::string tagName);
+    };
+
     class Transform
     {
     private:
@@ -21,6 +30,7 @@ namespace ESGI
         static int countGameObject;
 
         std::string name;
+        std::string m_tag;
         Transform *positon;
 
         bool Initialize() final;

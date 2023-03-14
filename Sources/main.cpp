@@ -194,6 +194,8 @@ int main()
 
 	Application gameEngine;
 
+	auto obj = new GameObject;
+
 	gameEngine.Run();
 
 	return 0;

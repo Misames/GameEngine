@@ -19,18 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Sources\Component.cpp" />
     <ClCompile Include="Sources\Engine.cpp" />
+    <ClCompile Include="Sources\Entity.cpp" />
     <ClCompile Include="Sources\Input.cpp" />
     <ClCompile Include="Sources\main.cpp" />
     <ClCompile Include="Sources\GameObject.cpp" />
+    <ClCompile Include="Sources\Scene.cpp" />
     <ClCompile Include="Sources\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sources\Component.h" />
     <ClInclude Include="Sources\Engine.h" />
     <ClInclude Include="Sources\EngineContext.h" />
+    <ClInclude Include="Sources\Entity.h" />
     <ClInclude Include="Sources\GameObject.h" />
     <ClInclude Include="Sources\InfraStructure.h" />
     <ClInclude Include="Sources\Input.h" />
+    <ClInclude Include="Sources\Scene.h" />
     <ClInclude Include="Sources\Timer.h" />
     <ClInclude Include="Sources\Utils.h" />
   </ItemGroup>

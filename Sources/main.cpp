@@ -221,7 +221,7 @@ int main()
 
 	std::cout << obj1->getTag() << std::endl;
 
-	// gameEngine.Run();
+	gameEngine.Run();
 
 	return 0;
 }

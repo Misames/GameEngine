@@ -1,9 +1,11 @@
 #include "GameObject.h"
-#include <iostream>
-#include <string>
 
 namespace ESGI
 {
+    /**
+     * Tag
+     */
+
     std::string Tag::defaultTagName = "Untagged";
     std::vector<std::string> Tag::tags = {"Untagged"};
 
@@ -34,6 +36,10 @@ namespace ESGI
         }
     }
 
+    /**
+     * GameObject
+     */
+
     uint64_t GameObject::countGameObject = 0;
     std::vector<GameObject *> GameObject::gameObjects;
 
@@ -43,28 +49,17 @@ namespace ESGI
         m_transform = new Transform();
         m_tag = Tag::defaultTagName;
         GameObject::countGameObject++;
-        Initialize();
-    }
-
-    bool GameObject::Initialize()
-    {
         std::cout << "[GameObject] initialized\n";
         std::cout << m_name << std::endl;
         std::cout << "Count " << countGameObject << std::endl;
-        return true;
     }
 
     GameObject::~GameObject()
     {
         delete m_transform;
-        DeInitialize();
-        countGameObject--;
-    }
-
-    void GameObject::DeInitialize()
-    {
         std::cout << "[GameObject] deinitialized\n";
         std::cout << "Count " << countGameObject << std::endl;
+        countGameObject--;
     }
 
     void GameObject::Update()
@@ -98,4 +93,9 @@ namespace ESGI
         return taggedGameObjects;
     }
 
+    /**
+     * transform
+     */
+
+    void Transform::Update() {}
 }

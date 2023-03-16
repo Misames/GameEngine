@@ -1,12 +1,17 @@
 #pragma once
 
-#include "InfraStructure.h"
+#include "Component.h"
+#include "Entity.h"
+
 #include <vector>
+#include <string>
+#include <iostream>
 
 namespace ESGI
 {
-    struct Tag
+    class Tag
     {
+    public:
         static std::string defaultTagName;
         static std::vector<std::string> tags;
         static void AddTag(std::string newTagName);
@@ -14,23 +19,25 @@ namespace ESGI
         static void RenamingTag(uint8_t index, std::string newTagName);
     };
 
-    struct Transform
+    class Transform : public Component
     {
+    public:
         double tx, ty, tz;
         double rx, ry, rz;
         double sx, sy, sz;
+
         Transform() : tx(0), ty(0), tz(0), rx(0), ry(0), rz(0), sx(0), sy(0), sz(0) {}
+        ~Transform() {}
+        void Update();
     };
 
-    class GameObject : public InfraStructure
+    class GameObject : public Entity
     {
     private:
         std::string m_name;
         std::string m_tag;
         Transform *m_transform;
-
-        bool Initialize() final;
-        void DeInitialize() final;
+        std::vector<GameObject *> m_gameObjectChild;
 
     public:
         static uint64_t countGameObject;

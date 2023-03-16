@@ -11,6 +11,9 @@ namespace ESGI
 {
     class Tag
     {
+    private:
+        Tag();
+
     public:
         static std::string defaultTagName;
         static std::vector<std::string> tags;
@@ -28,7 +31,7 @@ namespace ESGI
 
         Transform() : tx(0), ty(0), tz(0), rx(0), ry(0), rz(0), sx(0), sy(0), sz(0) {}
         ~Transform() {}
-        void Update();
+        void Update() final;
     };
 
     class GameObject : public Entity
@@ -46,7 +49,7 @@ namespace ESGI
 
         GameObject();
         ~GameObject();
-        void Update();
+        void Update() final;
         void ChangeTag(uint8_t indexTag);
         std::string getTag() const;
     };

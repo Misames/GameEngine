@@ -2,10 +2,14 @@
 
 #include "InfraStructure.h"
 
+#include <chrono>
+
 namespace ESGI
 {
 	struct Input : public InfraStructure
 	{
+		std::chrono::system_clock::time_point lastIntentTimestamp;
+
 		bool QuitButtonPressed = false;
 
 		bool Initialize() final;

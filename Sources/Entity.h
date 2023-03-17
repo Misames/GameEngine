@@ -2,31 +2,35 @@
 
 #include <vector>
 #include <string>
-#include "ObjectArena.h" //inclut la classe ObjectArena utilisée pour gérer la mémoire
+#include "ObjectArena.h" //inclut la classe ObjectArena utilisï¿½e pour gï¿½rer la mï¿½moire
 
 namespace ESGI
 {
-	//forward declaration de la classe Component utilisée dans Entity
+	// forward declaration de la classe Component utilisï¿½e dans Entity
 	class Component;
 
 	class Entity
 	{
 	protected:
-		uint64_t m_entityID; // identifiant unique de l'entité
-		std::vector<Component*> m_component; // vecteur de pointeurs vers les composants de l'entité
-		static ObjectArena g_Arena; // instance statique de la classe ObjectArena utilisée pour gérer la mémoire
+		uint64_t m_entityID;				  // identifiant unique de l'entitï¿½
+		std::vector<Component *> m_component; // vecteur de pointeurs vers les composants de l'entitï¿½
+		static ObjectArena g_Arena;			  // instance statique de la classe ObjectArena utilisï¿½e pour gï¿½rer la mï¿½moire
 
 	public:
-		Entity(); // constructeur
-		~Entity(); // destructeur
-		virtual void Update(); // méthode virtuelle appelée à chaque itération de la boucle principale du jeu
+		Entity();			   // constructeur
+		~Entity();			   // destructeur
+		virtual void Update(); // mï¿½thode virtuelle appelï¿½e ï¿½ chaque itï¿½ration de la boucle principale du jeu
 
-		// Surcharge des opérateurs new et delete pour gérer la mémoire
-		void* operator new(const size_t size);
-		void operator delete(void* pointer);
+		// Surcharge des opï¿½rateurs new et delete pour gï¿½rer la mï¿½moire
+		void *operator new(const size_t size);
+		void operator delete(void *pointer);
 
-		// Méthode statique pour créer un pool d'objets dans ObjectArena
-		static void CreatePool(const std::type_info& classInfo, int count);
+		// Mï¿½thode statique pour crï¿½er un pool d'objets dans ObjectArena
+		static void CreatePool(const std::type_info &classInfo, int count);
 		static void DeletePool();
+
+		template <typename T>
+		T *GetComponent();
+		std::vector<Component *> GetComponent();
 	};
 }

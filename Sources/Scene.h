@@ -18,17 +18,16 @@ namespace ESGI
 		int m_nbGameObjects;
 
 		GameObject* currentObjectSelect;
-		std::vector<GameObject*> m_gameObjects;
-		//std::map<std::type_info,int> m_typeEntity;
-		//std::map<std::type_info,int> m_typeComponent;
-
+		std::vector<std::shared_ptr<ESGI::GameObject>> m_gameObjects;
+		// std::map<std::type_info,int> m_typeEntity;
+		// std::map<std::type_info,int> m_typeComponent;
 
 		Scene() {};
 		Scene(std::string name);
 		void CreatePoolEntity(const std::type_info& entityClass, int poolSize);
 		void CreatePoolComponent(const std::type_info& componentClass, int poolSize);
-
+		void AddGameObject();
 
 		~Scene() {};
 	};
-}
+};

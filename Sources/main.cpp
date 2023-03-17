@@ -42,9 +42,9 @@ namespace ESGI
 	// Par contre si les lignes suivantes sont commentees, le compilateur n'aura d'autre choix
 	// que d'appeler le constructeur, seule fonction qui ressemble a cet appel -
 	// ce qui engendre un comportement menant au crash dans notre cas
-	Clock& EngineContext::Clock() const { return clock; }
-	Input& EngineContext::Input() const { return input; }
-	Engine& EngineContext::Engine() const { return engine; }
+	Clock &EngineContext::Clock() const { return clock; }
+	Input &EngineContext::Input() const { return input; }
+	Engine &EngineContext::Engine() const { return engine; }
 	// une map ou une recherche par identifiant dans un vector serait sans doute plus elegant et generique
 
 	//
@@ -54,18 +54,18 @@ namespace ESGI
 	struct Application
 	{
 		// ce vecteur va nous permettre d'iterer sur l'ensemble des elements du moteur sans les nommer individuellement
-		std::vector<InfraStructure*> m_cores;
+		std::vector<InfraStructure *> m_cores;
 
 		// les references sont plus complexes a initialiser (via le constructeur seulement)
-		EngineContext& m_context;
+		EngineContext &m_context;
 
 		uint64_t m_frameIndex = 0;
 
 		bool m_needToQuit = false;
 
-		Application(EngineContext& context) : m_context(context) {}
+		Application(EngineContext &context) : m_context(context) {}
 		Application() : Application(Application::CreateContext()) {} // Depuis le C++11 un constructeur peut en appeler un autre
-		Application(Application& app) = delete;                      // une application ne peut etre dupliquee
+		Application(Application &app) = delete;						 // une application ne peut etre dupliquee
 
 		// Le fait de creer explicitement les elements important du moteur nous permet de mieux
 		// maitriser la gestion memoire mais plus particulierement l'ordre de construction/destruction
@@ -78,11 +78,11 @@ namespace ESGI
 		//
 		// notez l'usage d'un pseudo-singleton sous la forme d'une seule variable statique, ce qui simplifie enormement la gestion
 		//
-		static EngineContext& CreateContext()
+		static EngineContext &CreateContext()
 		{
-			Clock* clock = new ESGI::Clock;
-			Input* input = new ESGI::Input;
-			Engine* engine = new ESGI::Engine;
+			Clock *clock = new ESGI::Clock;
+			Input *input = new ESGI::Input;
+			Engine *engine = new ESGI::Engine;
 
 			static EngineContext context(*clock, *input, *engine);
 			return context;
@@ -106,7 +106,7 @@ namespace ESGI
 
 		void Destroy()
 		{
-			for (auto* core : make_reverse(m_cores))
+			for (auto *core : make_reverse(m_cores))
 			{
 #if defined(_DEBUG)
 				std::cout << "destroying core " << core->DebugName().c_str() << std::endl;
@@ -114,14 +114,14 @@ namespace ESGI
 				delete core;
 			}
 
-			m_cores.clear();         // resize a zero element (mais la capacite ne change pas)
+			m_cores.clear();		 // resize a zero element (mais la capacite ne change pas)
 			m_cores.shrink_to_fit(); // ajuste la capacity a la size du vector (libere la memoire)
 		}
 
 		bool Initialize()
 		{
 			bool allOk = true;
-			for (auto* core : m_cores)
+			for (auto *core : m_cores)
 			{
 				allOk &= core->Initialize();
 			}
@@ -129,10 +129,10 @@ namespace ESGI
 			// exemple de scheduling de deux fonctions (non membre, plus simple a faire)
 			// todo: event/delegate facon c# acceptant tout type de fonction.
 
-			ESGI::Timer timer1{ 9.0, 0.0, false };
+			ESGI::Timer timer1{9.0, 0.0, false};
 			m_context.Clock().AddTimer(timer1, &OneTimeEvent);
 
-			ESGI::Timer timer2{ 5.0, 0.0, true };
+			ESGI::Timer timer2{5.0, 0.0, true};
 			m_context.Clock().AddTimer(timer2, &RecurringTimeEvent);
 
 			return allOk;
@@ -140,7 +140,7 @@ namespace ESGI
 
 		void DeInitialize()
 		{
-			for (auto* core : make_reverse(m_cores))
+			for (auto *core : make_reverse(m_cores))
 			{
 				core->DeInitialize();
 			}
@@ -198,11 +198,20 @@ int main()
 
 	Tag::AddTag("pouet");
 	Tag::AddTag("kiki");
-	Tag::RenamingTag(2, "lol");
+	Scene *mainScene = new Scene("SampleScene");
+	mainScene->CreatePoolEntity(typeid(GameObject), 20);
+	mainScene->CreatePoolComponent(typeid(Component), 20);
 
-	Scene* mainScene = new Scene("SampleScene");
+	for (int i = 0; i < 10; i++)
+	{
+		mainScene->AddGameObject();
+	}
+
 	auto lstObj = GameObject::FindObjectsWithTag(Tag::defaultTagName);
 
+	Tag::RenamingTag(0, "lol");
+
+	auto res = GameObject::FindObjectsWithTag("lol");
 
 	gameEngine.Run();
 

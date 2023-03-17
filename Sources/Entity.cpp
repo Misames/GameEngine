@@ -1,30 +1,56 @@
 #include <typeinfo>
 #include "Entity.h"
+#include "GameObject.h"
 
-namespace ESGI {
+namespace ESGI
+{
 
-	ObjectArena Entity::g_Arena = ObjectArena(); // initialisation de l'instance statique de ObjectArena
+    ObjectArena Entity::g_Arena = ObjectArena(); // initialisation de l'instance statique de ObjectArena
 
-	Entity::Entity() {
-		m_entityID = NULL; // initialisation de l'identifiant de l'entité à NULL
-	}
+    Entity::Entity()
+    {
+        m_entityID = NULL; // initialisation de l'identifiant de l'entitï¿½ ï¿½ NULL
+    }
 
-	Entity::~Entity() {}
+    Entity::~Entity() {}
 
-	void Entity::Update() {} // implémentation vide de la méthode Update
+    void Entity::Update() {} // implï¿½mentation vide de la mï¿½thode Update
 
-	void* Entity::operator new(const size_t size) {
-		return g_Arena.Allocate((uint32_t)size); // utilisation de la méthode Allocate de ObjectArena pour allouer de la mémoire pour l'entité
-	}
+    void *Entity::operator new(const size_t size)
+    {
+        return g_Arena.Allocate((uint32_t)size); // utilisation de la mï¿½thode Allocate de ObjectArena pour allouer de la mï¿½moire pour l'entitï¿½
+    }
 
-	void Entity::operator delete(void* pointer) {
-		//g_Arena.DeallocateObject(static_cast<Entity*>(pointer));
-	} // implémentation vide de l'opérateur delete
+    void Entity::operator delete(void *pointer)
+    {
+        // g_Arena.DeallocateObject(static_cast<Entity*>(pointer));
+    } // implï¿½mentation vide de l'opï¿½rateur delete
 
-	void Entity::CreatePool(const std::type_info& classInfo,int count) {
-		g_Arena.Initialise(count * sizeof(classInfo), count); // initialisation d'un pool d'objets de taille "count" * sizeof(Entity) dans ObjectArena
-	}
-	void Entity::DeletePool() {
-		g_Arena.Destroy(); // initialisation d'un pool d'objets de taille "count" * sizeof(Entity) dans ObjectArena
-	}
+    void Entity::CreatePool(const std::type_info &classInfo, int count)
+    {
+        g_Arena.Initialise(count * sizeof(classInfo), count); // initialisation d'un pool d'objets de taille "count" * sizeof(Entity) dans ObjectArena
+    }
+    void Entity::DeletePool()
+    {
+        g_Arena.Destroy(); // initialisation d'un pool d'objets de taille "count" * sizeof(Entity) dans ObjectArena
+    }
+
+    std::vector<Component *> Entity::GetComponent()
+    {
+        return this->m_component;
+    }
+
+    template <typename T>
+    T *Entity::GetComponent()
+    {
+        for (Component *component : this->m_component)
+        {
+            if (typeid(*component) == typeid(T))
+                return static_cast<T *>(component);
+        }
+        return nullptr;
+    }
+
+    // Instanciation explicite des modÃ¨les utilisÃ©s
+    template Transform *Entity::GetComponent<Transform>();
 }

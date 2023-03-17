@@ -11,10 +11,11 @@ namespace ESGI
     public:
         uint8_t m_id;
         std::string m_name = "SampleScene";
-        GameObject *m_currentObjectSelect;
+        GameObject *currentObjectSelect;
+        std::vector<std::shared_ptr<GameObject>> m_gameObjects;
 
-        Scene();
-        Scene(std::string name);
-        ~Scene();
+        Scene(){};
+        Scene(std::string name, std::vector<std::shared_ptr<GameObject>> lstObjects);
+        ~Scene(){};
     };
 }

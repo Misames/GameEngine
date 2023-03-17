@@ -41,7 +41,7 @@ namespace ESGI
      */
 
     uint64_t GameObject::countGameObject = 0;
-    std::vector<GameObject *> GameObject::gameObjects;
+    std::vector<std::shared_ptr<GameObject>> GameObject::gameObjects;
 
     GameObject::GameObject()
     {
@@ -76,15 +76,15 @@ namespace ESGI
         return m_tag;
     }
 
-    std::vector<GameObject *> GameObject::FindObjectsWithTag(std::string tagName)
+    std::vector<std::shared_ptr<GameObject>> GameObject::FindObjectsWithTag(std::string tagName)
     {
-        std::vector<GameObject *> taggedGameObjects = std::vector<GameObject *>();
+        std::vector<std::shared_ptr<GameObject>> taggedGameObjects = std::vector<std::shared_ptr<GameObject>>();
 
         for (auto &&item : GameObject::gameObjects)
         {
             if (item->m_tag == tagName)
             {
-                std::cout << "get tag !!!" << std::endl;
+                std::cout << "get tag : " << tagName << std::endl;
                 taggedGameObjects.push_back(item);
             }
         }

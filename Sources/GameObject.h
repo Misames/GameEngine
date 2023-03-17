@@ -38,8 +38,8 @@ namespace ESGI
     {
     public:
         static uint64_t countGameObject;
-        static std::vector<GameObject *> gameObjects;
-        static std::vector<GameObject *> FindObjectsWithTag(std::string tagName);
+        static std::vector<std::shared_ptr<GameObject>> gameObjects;
+        static std::vector<std::shared_ptr<GameObject>> FindObjectsWithTag(std::string tagName);
 
     public:
         std::string m_name;

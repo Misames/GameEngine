@@ -93,6 +93,12 @@ namespace ESGI
         return taggedGameObjects;
     }
 
+    void * GameObject::operator new(const size_t size) { return g_Arena.Allocate(size); }
+    void GameObject::operator delete(void *pointer) {}
+    void GameObject::CreatePool(int count) {
+      g_Arena.Initialise(count * sizeof(GameObject));
+    }
+
     /**
      * transform
      */

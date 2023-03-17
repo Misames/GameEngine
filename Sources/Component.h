@@ -4,16 +4,16 @@
 
 namespace ESGI
 {
-    class Component
-    {
-    protected:
-        Entity *m_entity;
+	class Component
+	{
+	protected:
+		Entity* m_entity;
 
-    public:
-        Component();
-        Component(Entity *entity);
-        virtual ~Component();
-        virtual void Update();
-        Entity *getEntity() const;
-    };
+	public:
+		Component();
+		Component(Entity* entity);
+		virtual ~Component();
+		virtual void Update();
+		Entity* getEntity() const;
+	};
 }

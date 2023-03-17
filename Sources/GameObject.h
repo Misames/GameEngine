@@ -3,7 +3,6 @@
 #include "Component.h"
 #include "Entity.h"
 
-#include "ObjectArena.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -38,7 +37,6 @@ namespace ESGI {
 		std::string m_tag;
 		Transform* m_transform;
 		std::vector<GameObject*> m_gameObjectChild;
-		static ObjectArena g_Arena;
 
 	public:
 		static uint64_t countGameObject;
@@ -51,9 +49,6 @@ namespace ESGI {
 		void ChangeTag(uint8_t indexTag);
 		std::string getTag() const;
 
-		// Operator for ObjectArena
-		void* operator new(const size_t size);
-		void operator delete(void* pointer);
-		static void CreatePool(int count);
+		
 	};
 } // namespace ESGI

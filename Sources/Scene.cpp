@@ -2,9 +2,12 @@
 
 namespace ESGI
 {
-    Scene::Scene(std::string name, std::vector<GameObject *> lstObjects)
+    Scene::Scene() {}
+
+    Scene::Scene(std::string name)
     {
         this->m_name = name;
-        this->m_gameObjects = lstObjects;
     }
+
+    Scene::~Scene() {}
 }

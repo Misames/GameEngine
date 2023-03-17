@@ -9,13 +9,17 @@ namespace ESGI
 
     class Entity
     {
-    protected:
+    public:
         uint64_t m_entityID;
         std::vector<Component *> m_component;
 
-    public:
-        Entity() {}
-        ~Entity() {}
+        Entity();
+        ~Entity();
+
         virtual void Update();
+
+        template <typename T>
+        T *GetComponent();
+        std::vector<Component *> GetComponent();
     };
 }

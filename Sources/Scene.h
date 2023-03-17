@@ -9,13 +9,12 @@ namespace ESGI
     class Scene
     {
     public:
-        uint8_t ID;
+        uint8_t m_id;
         std::string m_name = "SampleScene";
-        GameObject *currentObjectSelect;
-        std::vector<GameObject *> m_gameObjects;
+        GameObject *m_currentObjectSelect;
 
-        Scene(){};
-        Scene(std::string name, std::vector<GameObject *> lstObjects);
-        ~Scene(){};
+        Scene();
+        Scene(std::string name);
+        ~Scene();
     };
 }

@@ -189,31 +189,13 @@ namespace ESGI
     };
 }
 
-void initScene(ESGI::Scene *scene)
-{
-    // Créer 20 GameObjects
-    for (size_t i = 0; i < 20; i++)
-    {
-        auto obj = new ESGI::GameObject();
-        ESGI::GameObject::gameObjects.push_back(obj);
-    }
-}
-
 int main()
 {
     using namespace ESGI;
 
     Application gameEngine;
 
-    Tag::AddTag("pouet");
-    Tag::AddTag("kiki");
-    Tag::RenamingTag(2, "lol");
-    Scene *mainScene = new Scene("SampleScene", GameObject::gameObjects);
-    initScene(mainScene);
-    auto lstObj = GameObject::FindObjectsWithTag(Tag::defaultTagName);
-
-
-    // gameEngine.Run();
+    gameEngine.Run();
 
     return 0;
 }

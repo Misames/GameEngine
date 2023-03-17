@@ -14,25 +14,25 @@ namespace ESGI
         Tag::tags.push_back(newTagName);
     }
 
-    void Tag::DeleteTag(uint8_t index)
+    void Tag::DeleteTag(uint8_t tagIndex)
     {
         for (auto &&item : GameObject::gameObjects)
         {
-            if (item->getTag() == tags.at(index))
+            if (item->getTag() == tags.at(tagIndex))
                 item->ChangeTag(0);
         }
 
-        Tag::tags.erase(Tag::tags.begin() + index);
+        Tag::tags.erase(Tag::tags.begin() + tagIndex);
     }
 
-    void Tag::RenamingTag(uint8_t index, std::string newTagName)
+    void Tag::RenamingTag(uint8_t tagIndex, std::string newTagName)
     {
-        auto oldTag = Tag::tags.at(index);
-        Tag::tags[index] = newTagName;
+        auto oldTag = Tag::tags.at(tagIndex);
+        Tag::tags[tagIndex] = newTagName;
         for (auto &&i : GameObject::gameObjects)
         {
             if (i->getTag() == oldTag)
-                i->ChangeTag(index);
+                i->ChangeTag(tagIndex);
         }
     }
 
@@ -46,7 +46,7 @@ namespace ESGI
     GameObject::GameObject()
     {
         m_name = "GameObject " + std::to_string(countGameObject);
-        m_transform = new Transform();
+        m_component.push_back(new Transform);
         m_tag = Tag::defaultTagName;
         GameObject::countGameObject++;
         std::cout << "[GameObject] initialized\n";
@@ -56,7 +56,6 @@ namespace ESGI
 
     GameObject::~GameObject()
     {
-        delete m_transform;
         std::cout << "[GameObject] deinitialized\n";
         std::cout << "Count " << countGameObject << std::endl;
         countGameObject--;
@@ -96,6 +95,10 @@ namespace ESGI
     /**
      * transform
      */
+
+    Transform::Transform() : tx(0), ty(0), tz(0), rx(0), ry(0), rz(0), sx(0), sy(0), sz(0) {}
+
+    Transform::~Transform() {}
 
     void Transform::Update() {}
 }

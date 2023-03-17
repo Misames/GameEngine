@@ -1,3 +1,4 @@
+#include <typeinfo>
 #include "Entity.h"
 
 namespace ESGI {
@@ -16,9 +17,14 @@ namespace ESGI {
 		return g_Arena.Allocate((uint32_t)size); // utilisation de la méthode Allocate de ObjectArena pour allouer de la mémoire pour l'entité
 	}
 
-	void Entity::operator delete(void* pointer) {} // implémentation vide de l'opérateur delete
+	void Entity::operator delete(void* pointer) {
+		//g_Arena.DeallocateObject(static_cast<Entity*>(pointer));
+	} // implémentation vide de l'opérateur delete
 
-	void Entity::CreatePool(int count) {
-		g_Arena.Initialise(count * sizeof(Entity)); // initialisation d'un pool d'objets de taille "count" * sizeof(Entity) dans ObjectArena
+	void Entity::CreatePool(const std::type_info& classInfo,int count) {
+		g_Arena.Initialise(count * sizeof(classInfo), count); // initialisation d'un pool d'objets de taille "count" * sizeof(Entity) dans ObjectArena
+	}
+	void Entity::DeletePool() {
+		g_Arena.Destroy(); // initialisation d'un pool d'objets de taille "count" * sizeof(Entity) dans ObjectArena
 	}
 }

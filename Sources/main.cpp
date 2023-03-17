@@ -17,6 +17,7 @@
 #include <iostream>
 #include <vector>
 #include <thread>
+#include <map>
 
 namespace ESGI
 {
@@ -198,11 +199,12 @@ int main()
 	Tag::AddTag("pouet");
 	Tag::AddTag("kiki");
 	Tag::RenamingTag(2, "lol");
-	Scene* mainScene = new Scene("SampleScene", 20);
+
+	Scene* mainScene = new Scene("SampleScene");
 	auto lstObj = GameObject::FindObjectsWithTag(Tag::defaultTagName);
 
 
-	// gameEngine.Run();
+	gameEngine.Run();
 
 	return 0;
 }

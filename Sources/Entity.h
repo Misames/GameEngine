@@ -26,6 +26,7 @@ namespace ESGI
 		void operator delete(void* pointer);
 
 		// Méthode statique pour créer un pool d'objets dans ObjectArena
-		static void CreatePool(int count);
+		static void CreatePool(const std::type_info& classInfo, int count);
+		static void DeletePool();
 	};
 }

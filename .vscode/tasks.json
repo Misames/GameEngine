@@ -1,0 +1,66 @@
+{
+    "version": "2.0.0",
+    "windows": {
+        "options": {
+            "shell": {
+                "executable": "cmd.exe",
+                "args": [
+                    "/C",
+                    // The path to VsDevCmd.bat depends on the version of Visual Studio you have installed.
+                    "\"E:/Visual Studio 2022 Entreprise/Common7/Tools/VsDevCmd.bat\"",
+                    "&&"
+                ]
+            }
+        }
+    },
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Build Debug",
+            "command": "cl.exe",
+            "args": [
+                "/Zi",
+                "/EHsc",
+                "/FoIntermediate/Debug/",
+                "/FdIntermediate/Debug/",
+                "/Fe:",
+                "Builds/Debug/main.exe",
+                "Sources/*.cpp"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "Build Release",
+            "command": "cl.exe",
+            "args": [
+                "/Zi",
+                "/EHsc",
+                "/FoIntermediate/Release/",
+                "/FdIntermediate/Release/",
+                "/Fe:",
+                "Builds/Release/main.exe",
+                "Sources/*.cpp"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        }
+    ]
+}
